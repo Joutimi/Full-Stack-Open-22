@@ -3,7 +3,7 @@ import { useState } from 'react'
 const StatisticLine = (props) => <tr><td>{props.text}</td><td>{props.value}</td><td>{props.merkki}</td></tr>
 
 const Statistics = (props) => {
-  if (props.good+props.bad+props.neutral != 0) {
+  if (props.good+props.bad+props.neutral !== 0) {
     return (
       <table>
         <tbody>
