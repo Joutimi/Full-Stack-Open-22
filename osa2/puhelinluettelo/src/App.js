@@ -35,7 +35,7 @@ const App = () => {
     }
   }
 
-  //käsitellään nimimuutosta
+  //Käsitellään nimimuutosta
   const handleNameChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
