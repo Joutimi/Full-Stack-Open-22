@@ -1,10 +1,9 @@
-const Hello = ({ name, age }) => {
-  const bornYear = () => new Date().getFullYear() - age
-  
+const Hello = (props) => {
   return (
     <div>
-      <p> Hello {name}, you are {age} years old </p>
-      <p> So you were probably born {bornYear()} </p>
+      <p>
+        Hello {props.name}, you are {props.age} years old
+      </p>
     </div>
   )
 }
@@ -22,4 +21,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
