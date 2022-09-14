@@ -13,7 +13,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterPersons, setFilterPersons] = useState('')
 
-  //filterointi
+  //filteröinti
   const personsToShow = persons.filter(person => person.name.toUpperCase().includes(filterPersons.toUpperCase()))
   
   //uuden henkilön lisäys
