@@ -13,11 +13,13 @@ const App = () => {
     axios
       .get('http://localhost:3001/persons')
       .then(response => {
+        //logi promisen onnistumisesta
         console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
-  
+
+  //logi listan pituudesta
   console.log('render', persons.length, 'persons')
   
 
