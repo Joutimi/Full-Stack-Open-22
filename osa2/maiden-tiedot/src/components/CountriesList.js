@@ -3,17 +3,20 @@ import { OneCountry } from "./OneCountry"
 
 export const CountriesList = ({ countriesToShow, setCountryFilter }) => {
     // Jos on vain yksi maa
-    if (countriesToShow.length == 1) {
+    if (countriesToShow.length === 1) {
         return (
             countriesToShow.map(country => <OneCountry country={country} key={country.name.common} />)
         )
     }
 
+
+    //Nappi; näyttää tekstin ja pitää sisällään tiedon listatusta maasta
     const Button = ({ buttonClick, text, countryValue }) => ( 
+        //Tieto maasta välitetään buttonClickille
         <button onClick={() => buttonClick(countryValue)} >
             {text}
         </button> )
-    
+    //Napin painallus muuttaa hakuruudun tekstisisällön vastaamaan nappiin tallennettua tietoa
     const buttonClick = (countryValue) => {
         console.log(countryValue)
         setCountryFilter(countryValue)
