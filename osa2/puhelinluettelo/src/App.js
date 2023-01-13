@@ -2,22 +2,12 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import AddNewNumber from './components/AddNewNumber'
 import { NumbersList } from './components/NumbersList'
+import personService from './services/personService'
 import axios from 'axios'
 
 const App = () => {
 
   const [persons, setPersons] = useState([])
-
-  useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        //logi promisen onnistumisesta
-        console.log('promise fulfilled')
-        setPersons(response.data)
-      })
-  }, [])
 
   //logi listan pituudesta
   console.log('render', persons.length, 'persons')
@@ -28,6 +18,17 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterPersons, setFilterPersons] = useState('')
 
+  useEffect(() => {
+    console.log('effect')
+    personService
+      .getAll()
+      .then(response => {
+        //logi promisen onnistumisesta
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }, [])
+
   //filteröinti
   const personsToShow = persons.filter(person => person.name.toUpperCase().includes(filterPersons.toUpperCase()))
   
@@ -37,16 +38,20 @@ const App = () => {
     const personsObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1
+      // id: persons.length + 1
     }
   
     //tarkistetaan onko jo listassa
     if (persons.find(person => person.name === newName)) {
       alert(`${newName} is already added to phonebook`)
     } else {
-      setPersons(persons.concat(personsObject))
-      setNewName('')
-      setNewNumber('')
+        personService
+        .create(personsObject)
+        .then(response=> {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('')
+      })
     }
   }
 
