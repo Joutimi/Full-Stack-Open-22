@@ -3,7 +3,6 @@ import Filter from './components/Filter'
 import AddNewNumber from './components/AddNewNumber'
 import { NumbersList } from './components/NumbersList'
 import personService from './services/personService'
-import axios from 'axios'
 
 const App = () => {
 
@@ -12,7 +11,6 @@ const App = () => {
   //logi listan pituudesta
   console.log('render', persons.length, 'persons')
   
-
   //tilat
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -22,10 +20,8 @@ const App = () => {
     console.log('effect')
     personService
       .getAll()
-      .then(response => {
-        //logi promisen onnistumisesta
-        console.log('promise fulfilled')
-        setPersons(response.data)
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
 
@@ -38,21 +34,37 @@ const App = () => {
     const personsObject = {
       name: newName,
       number: newNumber,
-      // id: persons.length + 1
     }
   
     //tarkistetaan onko jo listassa
     if (persons.find(person => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with new one?`)) {
+        const personToUpdate = persons.find(p => p.name === personsObject.name)
+        const changedInfo = {...personToUpdate, number: newNumber}
+        personService
+          .updateInfo(changedInfo)
+          .then(returnedP => {
+            setPersons(persons.map(person => person.id !== returnedP.id ? person : returnedP))
+          })
+      } else { return }
+
     } else {
         personService
         .create(personsObject)
-        .then(response=> {
-          setPersons(persons.concat(response.data))
-          setNewName('')
-          setNewNumber('')
-      })
+          .then(returnedPerson => {
+            setPersons(persons.concat(returnedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
     }
+  }
+
+  //henkilön poisto
+  const delPerson = (person) => {
+    window.confirm(`Delete ${person.name}?`)
+    personService
+      .delNumber(person.id)
+    setPersons(persons.filter(arrayPerson => arrayPerson.id != person.id))
   }
 
   //Käsitellään nimimuutosta
@@ -73,6 +85,8 @@ const App = () => {
     setFilterPersons(event.target.value)
   }
 
+  
+
   //RETURN
   return (
     <div>
@@ -86,7 +100,7 @@ const App = () => {
       handleNameChange={handleNameChange} 
       handleNumberChange={handleNumberChange} />
 
-      <NumbersList personsToShow={personsToShow} />
+      <NumbersList personsToShow={personsToShow} delPerson={delPerson} />
       
     </div>
   )

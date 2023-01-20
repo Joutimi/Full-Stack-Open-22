@@ -26,7 +26,8 @@ export const CountriesList = ({ countriesToShow, setCountryFilter }) => {
     if (countriesToShow.length <= 10 && countriesToShow.length > 1) {
     return (
         <div>
-            {countriesToShow.map(country => <p key={country.name.common}> {country.name.common} <Button buttonClick={buttonClick} text='show' countryValue={country.name.common} /> </p>  ) }        
+            {countriesToShow.map(country => <p key={country.name.common}> {country.name.common} 
+            <Button buttonClick={buttonClick} text='show' countryValue={country.name.common} /> </p>  ) }        
         </div> 
         )
 
