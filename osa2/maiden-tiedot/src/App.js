@@ -9,8 +9,14 @@ const App = () => {
   //tieto
   const [countries, setCountries] = useState([])
 
+  //säätieto
+  const [weatherData, setWeatherData] = useState([])
+
   //tilat
   const [countryFilter, setCountryFilter] = useState('')
+
+  //api-avain tallennettuna muuttujaan
+  const api_key = process.env.REACT_APP_API_KEY
 
   //käsitellään tilan muutosta
   const handleCountryChange = (event) => {
@@ -25,7 +31,6 @@ const App = () => {
     
     
   useEffect(() => {
-    console.log('effect')
     axios
       .get('https://restcountries.com/v3.1/all')
       .then(response => {
@@ -38,7 +43,13 @@ const App = () => {
   return (
     <div>
       <Filter countryFilter={countryFilter} handleCountryChange={handleCountryChange} />
-      <CountriesList countriesToShow={countriesToShow} setCountryFilter={setCountryFilter}/>
+      <CountriesList 
+        countriesToShow={countriesToShow} 
+        setCountryFilter={setCountryFilter} 
+        api_key={api_key}
+        weatherData={weatherData}
+        setWeatherData={setWeatherData}
+      />
     </div>
   );
 }

@@ -1,4 +1,16 @@
-export const OneCountry = ({country}) => {
+import { useEffect } from "react"
+import axios from "axios"
+
+export const OneCountry = ({country, api_key, weatherData, setWeatherData}) => {
+    useEffect(() => {
+        axios
+        .get(`http://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${api_key}`)
+        .then(response => {
+            setWeatherData(response.data)
+            console.log(response.data)
+        })
+    }, [] )
+
     return (
         <div>
 
@@ -12,6 +24,11 @@ export const OneCountry = ({country}) => {
             </ul>
 
             <img src={country.flags.png} alt='' />
+
+            <h2> Weather in {country.capital}</h2>
+            <p> Temperature {weatherData.main.temp} celsius </p>
+            
+            <p> Wind {weatherData.wind.speed} m/s </p>
 
 
         </div>

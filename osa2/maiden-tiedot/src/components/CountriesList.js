@@ -1,11 +1,20 @@
+
+import { useEffect } from "react"
 import { OneCountry } from "./OneCountry"
 
 
-export const CountriesList = ({ countriesToShow, setCountryFilter }) => {
+export const CountriesList = ({ countriesToShow, setCountryFilter, api_key, weatherData, setWeatherData}) => {
     // Jos on vain yksi maa
     if (countriesToShow.length === 1) {
         return (
-            countriesToShow.map(country => <OneCountry country={country} key={country.name.common} />)
+            countriesToShow.map(country => 
+                <OneCountry 
+                country={country} 
+                key={country.name.common} 
+                api_key={api_key} 
+                weatherData={weatherData} 
+                setWeatherData={setWeatherData} 
+                />)
         )
     }
 
