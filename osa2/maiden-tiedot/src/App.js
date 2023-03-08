@@ -12,6 +12,8 @@ const App = () => {
   //säätieto
   const [weatherData, setWeatherData] = useState([])
 
+  const [weatherIcon, setWeatherIcon] = useState([])
+
   //tilat
   const [countryFilter, setCountryFilter] = useState('')
 
@@ -35,7 +37,7 @@ const App = () => {
       .get('https://restcountries.com/v3.1/all')
       .then(response => {
         //logi promisen onnistumisesta
-        console.log('promise fulfilled')
+        console.log('Promise fulfilled')
         setCountries(response.data)
       })
   }, [])
@@ -49,6 +51,8 @@ const App = () => {
         api_key={api_key}
         weatherData={weatherData}
         setWeatherData={setWeatherData}
+        weatherIcon={weatherIcon}
+        setWeatherIcon={setWeatherIcon}
       />
     </div>
   );
