@@ -1,7 +1,8 @@
 import { OneCountry } from "./OneCountry"
 
 
-export const CountriesList = ({ countriesToShow, 
+export const CountriesList = ({ 
+    countriesToShow, 
     setCountryFilter, 
     api_key, 
     weatherData, 
