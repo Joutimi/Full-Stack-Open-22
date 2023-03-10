@@ -1,15 +1,11 @@
 import { OneCountry } from "./OneCountry"
 
 
-export const CountriesList = ({ 
-    countriesToShow, 
+export const CountriesList = ({ countriesToShow, 
     setCountryFilter, 
-    api_key, 
-    weatherData, 
-    setWeatherData, 
-    weatherIcon, 
-    setWeatherIcon 
+    api_key
     }) => {
+
     // Jos on vain yksi maa
     if (countriesToShow.length === 1) {
         return (
@@ -17,16 +13,11 @@ export const CountriesList = ({
                 <OneCountry 
                 country={country} 
                 api_key={api_key} 
-                weatherData={weatherData} 
-                setWeatherData={setWeatherData}
-                weatherIcon={weatherIcon}
-                setWeatherIcon={setWeatherIcon}
                 key={country.name.common}
                 />)
         )
     }
-
-
+    
     //Nappi; näyttää tekstin ja pitää sisällään tiedon listatusta maasta
     const Button = ({ buttonClick, text, countryValue }) => ( 
         //Tieto maasta välitetään buttonClickille
