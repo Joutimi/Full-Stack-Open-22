@@ -9,11 +9,6 @@ const App = () => {
   //tieto
   const [countries, setCountries] = useState([])
 
-  //säätieto
-  const [weatherData, setWeatherData] = useState([])
-
-  const [weatherIcon, setWeatherIcon] = useState([])
-
   //tilat
   const [countryFilter, setCountryFilter] = useState('')
 
@@ -49,10 +44,6 @@ const App = () => {
         countriesToShow={countriesToShow} 
         setCountryFilter={setCountryFilter} 
         api_key={api_key}
-        weatherData={weatherData}
-        setWeatherData={setWeatherData}
-        weatherIcon={weatherIcon}
-        setWeatherIcon={setWeatherIcon}
       />
     </div>
   );
