@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Bond J",
-      "number": "43643",
-      "id": 1
-    },
-    {
       "name": "bond J",
       "number": "",
       "id": 2
@@ -14,6 +9,21 @@
       "name": "Janne M",
       "number": "2222",
       "id": 3
+    },
+    {
+      "name": "Petri S",
+      "number": "23463256",
+      "id": 4
+    },
+    {
+      "name": "JAsu",
+      "number": "6546",
+      "id": 5
+    },
+    {
+      "name": "Heikki L",
+      "number": "6345467",
+      "id": 6
     }
   ]
 }

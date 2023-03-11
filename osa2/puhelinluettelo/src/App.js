@@ -8,6 +8,7 @@ const App = () => {
 
   const [persons, setPersons] = useState([])
 
+
   //logi listan pituudesta
   console.log('render', persons.length, 'persons')
   
@@ -15,6 +16,30 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterPersons, setFilterPersons] = useState('')
+  const [confirmationMessage, setConfirmationMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const Notification = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+    return (
+      <div className="nMessage">
+        {message}
+      </div>
+    )
+  }
+
+  const ErrorNotification = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+    return (
+      <div className="eMessage">
+        {message}
+      </div>
+    )
+  }
 
   useEffect(() => {
     console.log('effect')
@@ -46,6 +71,14 @@ const App = () => {
           .then(returnedP => {
             setPersons(persons.map(person => person.id !== returnedP.id ? person : returnedP))
           })
+          .catch(error => {
+            setErrorMessage(
+              `Information of "${personsObject.name}" has already been removed from server`
+            )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+          })
       } else { return }
 
     } else {
@@ -56,6 +89,12 @@ const App = () => {
             setNewName('')
             setNewNumber('')
           })
+        setConfirmationMessage(
+          `Added '${personsObject.name}'`
+        )
+        setTimeout(() => {
+          setConfirmationMessage(null)
+        }, 5000)
     }
   }
 
@@ -91,6 +130,9 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+
+      <Notification message={confirmationMessage} />
+      <ErrorNotification message={errorMessage} />
 
       <Filter filterPersons={filterPersons} handleFilterChange={handleFilterChange} />
     

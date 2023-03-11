@@ -12,6 +12,9 @@ const App = () => {
   //tilat
   const [countryFilter, setCountryFilter] = useState('')
 
+  //api-avain tallennettuna muuttujaan
+  const api_key = process.env.REACT_APP_API_KEY
+
   //käsitellään tilan muutosta
   const handleCountryChange = (event) => {
     console.log(event.target.value)
@@ -25,12 +28,11 @@ const App = () => {
     
     
   useEffect(() => {
-    console.log('effect')
     axios
       .get('https://restcountries.com/v3.1/all')
       .then(response => {
         //logi promisen onnistumisesta
-        console.log('promise fulfilled')
+        console.log('Promise fulfilled')
         setCountries(response.data)
       })
   }, [])
@@ -38,7 +40,11 @@ const App = () => {
   return (
     <div>
       <Filter countryFilter={countryFilter} handleCountryChange={handleCountryChange} />
-      <CountriesList countriesToShow={countriesToShow} setCountryFilter={setCountryFilter}/>
+      <CountriesList 
+        countriesToShow={countriesToShow} 
+        setCountryFilter={setCountryFilter} 
+        api_key={api_key}
+      />
     </div>
   );
 }
