@@ -103,7 +103,7 @@ const App = () => {
     window.confirm(`Delete ${person.name}?`)
     personService
       .delNumber(person.id)
-    setPersons(persons.filter(arrayPerson => arrayPerson.id != person.id))
+    setPersons(persons.filter(arrayPerson => arrayPerson.id !== person.id))
   }
 
   //Käsitellään nimimuutosta
