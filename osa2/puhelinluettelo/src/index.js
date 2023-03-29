@@ -5,7 +5,7 @@ import './index.css'
 import App from './App'
 
 import axios from 'axios'
-const promise = axios.get('http://localhost:3001/api/persons')
-console.log(promise)
+//const promise = axios.get('http://localhost:3001/api/people')
+//console.log(promise)
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
