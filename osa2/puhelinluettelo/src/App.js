@@ -71,9 +71,8 @@ const App = () => {
             setPersons(persons.map(person => person.id !== returnedP.id ? person : returnedP))
           })
           .catch(error => {
-            setErrorMessage(
-              `Information of "${personsObject.name}" has already been removed from server`
-            )
+            console.log(error.response.data.error);
+            setErrorMessage(`${error.response.data.error}`)
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000)
