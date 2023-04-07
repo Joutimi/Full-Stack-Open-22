@@ -87,20 +87,20 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          setConfirmationMessage(
+            `Added '${personsObject.name}'`
+          )
+          setTimeout(() => {
+            setConfirmationMessage(null)
+          }, 5000)
         })
         .catch(error => {
-          console.log(error.response.data.error)
-          setErrorMessage(error.response.data.error)
+          console.log(error.response.data.error);
+          setErrorMessage(`${error.response.data.error}`)
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
-        }).end()
-        setConfirmationMessage(
-          `Added '${personsObject.name}'`
-        )
-        setTimeout(() => {
-          setConfirmationMessage(null)
-        }, 5000)
+        })
     }
   }
 
